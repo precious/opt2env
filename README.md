@@ -6,20 +6,17 @@ You don't need to parse your options manually -- just write optstring and call o
 
 ### Usage
 Paste code from opt2env.sh at the beginning of your shell script and call opt2env function with the following options:  
-```
-opt2env "$OPTSTRING" "$@"
-```  
+`opt2env "$OPTSTRING" "$@"`  
 where **OPTSTRING** is string of options:  
 `"[-f|--foo|...|{FOO} <argument> example of option][-b|--bar|...|{BAR} another one]..."`  
 Here *-f, -foo* is example of an option that requires argument. After call of opt2env environment vaiable FOO will be set to user's value.
-*-b, --bar* is example of option that doesn't require argument. If it's encountered among command line an options, environment varialbe BAR will be set to 1.
+*-b, --bar* is example of option that doesn't require argument. If it's encountered among command line an options, environment varialbe BAR will be set to 1.  
 On success exit code will be zero, otherwise non-zero.  
 Free arguments are stored in the **FREE_ARGUMENTS** array.  
 *Note that opt2arg doesn't support style when argument is passed without spaces, e.g. -n100 instead of -n 100.*
 
 You can echo help based on your OPTSTRING. To do this call  
-```echo_help "$OPTSTRING"
-```
+`echo_help "$OPTSTRING"`  
 
 ### Examples
 1.
