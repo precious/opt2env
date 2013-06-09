@@ -29,11 +29,11 @@ Also you can echo help based on your OPTSTRING. To do this call
 ```docstring="[-b|{BAR} its a bar!][-f|--foo|{FOO} <filename> description of this option]"
 echo_help "$docstring"
 ```
-
+```
     -b its a bar!
     -f|--foo <filename> description of this option
     -h|--help print help
-    
+``` 
     
 2.
 ```docstring="[-b|{BAR} its a bar!][-f|--foo|{FOO} <filename> description of this option]"
