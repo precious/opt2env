@@ -47,10 +47,10 @@ function opt2env {
             if (( ${#words[@]} > 1 )); then
                 if echo ${words[1]} | grep -P '^<[^>]+>$' > /dev/null 2>1; then # option requires argument
                     req_arg+=("${words[0]}")
-                else
+                else # option doesn't require argument
                     not_req_arg+=("${words[0]}")
                 fi
-            else
+            else # option doesn't require argument
                 not_req_arg+=("${words[0]}")
             fi
         fi
@@ -90,25 +90,3 @@ function opt2env {
     [ "$RETVAL" == "0" ] && true || false
 }
 
-docstring="[-b|{BAR} its a bar!][-f|--foo|{FOO} <filename> description of this option]"
-echo_help "$docstring"
-echo --------------
-opt2env "$docstring" "$@"
-echo $?
-echo $FOO
-echo $BAR
-#echo ${FREE_ARGUMENTS[@]}
-
-
-#for f in $freep; do
-#    echo $f
-#done
-set -- "${FREE_ARGUMENTS[@]}"
-echo $1
-echo $2
-echo $3
-echo $4
-echo $5
-echo --------------
-
-#-f|--foo|{FOO} <filename> description of this option
