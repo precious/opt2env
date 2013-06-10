@@ -48,7 +48,6 @@ will result in
     1
     one cow
     two
-
-
-Here we set environment variables FOO and BAR to "Fee" and 1, then set free arguments to positional parameters.
+    
+Note, that in example above -f <filename> or --foo <filename> is parametrised argument, so env. variable FOO is set to "Fee". And -b or --bar is switch, so env. varialbe BAR is set to 1, when "two" and "one cow" are free arguments and can be accessed through FREE_ARGUMENTS array. Using *set* command we've set this free arguments to positional parameters, so they can be accessed though variables $1 and $2.
 
