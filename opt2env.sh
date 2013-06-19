@@ -29,8 +29,8 @@ function __get_var_name {
 }
 
 function echo_help {
-    echo $1 $'\n'
-    echo $2 | grep -Po '(?<=\[)[^]]+(?=\])' | sed 's/|{[^}]*}//' | sed "s/^/    /"
+    echo "$1" $'\n'
+    echo "$2" | grep -Po '(?<=\[)[^]]+(?=\])' | sed 's/|{[^}]*}//' | sed "s/^/    /"
     echo "    -h|--help print help"
 }
 
