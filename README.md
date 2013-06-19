@@ -5,7 +5,7 @@ opt2env -- parse command line options and set environment variables based on thi
 You don't need to parse your options manually -- just write optstring and call opt2env function
 
 ### Usage
-Paste code from opt2env.sh at the beginning of your shell script and call opt2env function with the following options:  
+Paste code from opt2env.sh at the beginning of your bash script and call opt2env function with the following options:  
 `opt2env "$OPTSTRING" "$@"`  
 where **OPTSTRING** is the string with description of options:  
 `"[-f|--foo|...|{FOO} <argument> example of option][-b|--bar|...|{BAR} another one]..."`  

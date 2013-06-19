@@ -29,13 +29,15 @@ function __get_var_name {
 }
 
 function echo_help {
-    echo $1 | grep -Po '(?<=\[)[^]]+(?=\])' | sed 's/|{[^}]*}//' | sed "s/^/    /"
+    echo $1 $'\n'
+    echo $2 | grep -Po '(?<=\[)[^]]+(?=\])' | sed 's/|{[^}]*}//' | sed "s/^/    /"
     echo "    -h|--help print help"
 }
 
 function opt2env {
-    __DOCSTRING=$1
-    shift # skip docstring
+    __USAGE=$1
+    __DOCSTRING=$2
+    shift 2 # skip docstring and usage
     __PREV_IFS="$IFS" # backup IFS
     IFS=$'\n' # set new IFS
     __PARAMS=`echo $__DOCSTRING | grep -Po '(?<=\[)[^]]+(?=\])'`
@@ -57,36 +59,37 @@ function opt2env {
     done
     
     IFS=' '
-    RETVAL=0
     FREE_ARGUMENTS=()
-    while [ $# -gt 0 ] ; do
-        if [ "$1" == "-h" -o "$1" == "--help" ]; then
-            echo_help "$__DOCSTRING"
-            exit
+    while [ $# -gt 0 ] ; do # iterate over command line arguments and set appropriate environment variables
+        if [ "$1" == "-h" -o "$1" == "--help" ]; then # just echo help and exit
+            echo_help "$__USAGE" "$__DOCSTRING"
+            exit 0
         fi
-        if [ "${1:0:1}" == "-" ]; then
+        if [ "${1:0:1}" == "-" ]; then # option should start with "-"
             varname=`__get_var_name "$1" "${not_req_arg[@]}"`
-            if [ -n "$varname" ]; then
+            if [ -n "$varname" ]; then # switch option
                 eval "$varname=1"
                 shift
                 continue
             fi
             varname=`__get_var_name "$1" "${req_arg[@]}"`
-            if [ -n "$varname" ]; then
-                eval "$varname=\"$2\""
-                shift 2
-                continue            
+            if [ -n "$varname" ]; then # parametrised argument
+                if [ $# -gt 1 -a "${2:0:1}" != "-" ]; then
+                    eval "$varname=\"$2\""
+                    shift 2
+                    continue
+                else # invalid command line options
+                    echo -e "error: '${1}' requires parameter\ntry --help or -h option for help"
+                    exit 1
+                fi
             fi
             # we encountered options that was not declared
-            RETVAL=1 # set exit code to 1 and exit
-            break
+            echo -e "error: unrecognized option '${1}'\ntry --help or -h option for help"
+            exit 1
         else
             FREE_ARGUMENTS+=("$1")
             shift
         fi
     done
     IFS="$__PREV_IFS" # restore IFS
-    # set exit code
-    [ "$RETVAL" == "0" ] && true || false
 }
-
