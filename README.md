@@ -11,10 +11,10 @@ where **OPTSTRING** is the string with description of options:
 `"[-f|--foo|...|{FOO} <argument> example of option][-b|--bar|...|{BAR} another one]..."`  
 Here *-f, -foo* is example of an option that requires argument. After call of opt2env environment variable FOO will be set to user's value.
 *-b, --bar* is example of an option that doesn't require argument. If it's encountered among command line an options, environment varialbe BAR will be set to 1.  
-"$USAGE" is the brief description of what your script do; can be empty string.
+**USAGE** is the brief description of what your script do; can be empty string.  
 Free arguments are stored in the **FREE_ARGUMENTS** array.
 
-If invalid command line options are passed opt2env will notify user and terminate execution.
+If invalid command line options are passed, opt2env will notify user and terminate execution.
 
 *Note that opt2arg doesn't support options style when argument is passed without space, e.g. -n100 instead of -n 100.*
 
