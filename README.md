@@ -41,7 +41,6 @@ will result in
 usage="demo script"
 docstring="[-b|{BAR} its a bar!][-f|--foo|{FOO} <filename> description of this option]"
 opt2env "$usage" "$docstring" "$@"
-echo $? # echo exit status
 echo $FOO
 echo $BAR
 set -- "${FREE_ARGUMENTS[@]}" # set free arguments to positional parameters
@@ -52,7 +51,6 @@ echo $2
 will result in
 
     ./demo.sh "one cow" -f Fee -b two
-    0
     Fee
     1
     one cow
