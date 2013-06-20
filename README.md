@@ -21,6 +21,8 @@ If invalid command line options are passed, opt2env will notify user and termina
 You can echo help based on your OPTSTRING and USAGE. To do this call  
 `echo_help "$USAGE" "$OPTSTRING"`  
 
+To reduce space taken by opt2env in your code you can use [minified version](http://bash-minifier.appspot.com/?url=https://raw.github.com/precious/opt2env/master/opt2env.sh)  
+
 ### Examples
 1.
 ```bash    
